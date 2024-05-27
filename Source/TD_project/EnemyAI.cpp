@@ -18,7 +18,10 @@ AEnemyAI::AEnemyAI()
 void AEnemyAI::BeginPlay()
 {
 	Super::BeginPlay();
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWaypoint::StaticClass(), Waypoints);
+	if (GetWorld()) {
+		UE_LOG(LogTemp, Warning, TEXT("got world"), );
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWaypoint::StaticClass(), Waypoints);
+	}
 	MoveToWaypoints();
 }
 
@@ -40,18 +43,31 @@ void AEnemyAI::MoveToWaypoints() {
 	AEnemyAIController* EnemyAIController = Cast<AEnemyAIController>(GetController());
 
 	if (EnemyAIController) {
+		UE_LOG(LogTemp, Warning, TEXT("Controller found"));
 		if (CurrentWaypoint <= Waypoints.Num()) {
 			for (AActor* Waypoint : Waypoints) {
 				AWaypoint* WaypointItr = Cast<AWaypoint>(Waypoint);
 
 				if (WaypointItr) {
+					UE_LOG(LogTemp, Warning, TEXT("Waypoint found with order: %d"), WaypointItr->GetWaypointOrder());
 					if (WaypointItr->GetWaypointOrder() == CurrentWaypoint) {
-						//CurrentWaypoint++;
-						EnemyAIController->MoveToActor(Waypoint, 5.f, false);
+						UE_LOG(LogTemp, Warning, TEXT("Moving to waypoint: %d"), CurrentWaypoint);
+						EnemyAIController->MoveToActor(WaypointItr, 0.f);
+						CurrentWaypoint++;
 						break;
 					}
 				}
+				else {
+					UE_LOG(LogTemp, Error, TEXT("Waypoint cast failed"));
+				}
 			}
 		}
+		else {
+			UE_LOG(LogTemp, Warning, TEXT("No more waypoints to move to"));
+		}
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("Controller cast failed"));
 	}
 }
+
