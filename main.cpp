@@ -1,4 +1,4 @@
-#include "Path.cpp"
+#include "Animal.cpp"
 #include "raylib.h"
 
 int main()
@@ -11,8 +11,10 @@ int main()
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
 
-    Image bee = LoadImage("assets/bee_yellow.png");
-    Texture2D bee_texture = LoadTextureFromImage(bee);
+    Image bee_image = LoadImage("assets/bee_yellow.png");
+    Texture2D bee_texture = LoadTextureFromImage(bee_image);
+    Image pig_image = LoadImage("assets/pig_pink.png");
+    Texture2D pig_texture = LoadTextureFromImage(pig_image);
 
     Path path = Path(0, 300);
     path.add(1, 200);
@@ -23,6 +25,9 @@ int main()
     path.add(2, 200);
     path.add(3, 200);
     path.add(0, 400);
+
+    Animal bee = Animal(path, 0, 0, bee_texture);
+    Animal pig = Animal(path, 0, 10, pig_texture);
 
     int posX = 0;
     int posY = 0;
@@ -36,6 +41,9 @@ int main()
         ClearBackground(BLACK);
 
         DrawTexture(bee_texture, posX, posY, WHITE);
+        DrawTexture(pig.texture, pig.x, pig.y, WHITE);
+
+        pig.update();
 
         int direction = -1;
         int length;
