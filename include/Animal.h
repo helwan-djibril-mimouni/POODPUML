@@ -10,6 +10,7 @@ public:
     int lengthFromPath;
     Path path;
     Texture2D texture;
+    bool end;
     Animal(Path path, int x, int y, Texture2D texture);
     ~Animal();
     void update();

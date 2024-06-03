@@ -7,6 +7,7 @@ Animal::Animal(Path path, int x, int y, Texture2D texture) : path(path)
     this->texture = texture;
     this->pathsDone = 0;
     this->lengthFromPath = 0;
+    this->end = false;
 }
 
 Animal::~Animal()
@@ -31,7 +32,7 @@ void Animal::update(){
     }
     std::cout << "end while" << std::endl;
     if (direction == -1){
-        CloseWindow();
+        this->end = true;
     }
     if (direction == 0){
         x++;
