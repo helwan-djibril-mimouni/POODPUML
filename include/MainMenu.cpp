@@ -18,6 +18,8 @@ class MainMenu{
 
                 DrawRectangle(275, 500, 250, 50, GRAY);
                 DrawText("Quit", 400-MeasureText("Quit",30)/2, 510, 30, WHITE);
+
+                DrawText("Made by: Albin Fabijan , Guillaume Bomben , Helwan-Djibril Mimouni", 10, 580, 20, WHITE);
             EndDrawing();
         }
 
