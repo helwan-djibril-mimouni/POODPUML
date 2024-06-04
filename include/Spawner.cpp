@@ -31,8 +31,8 @@ void Spawner::update(){
             else{
                 rand = std::rand() % waveScoreMax;
                 rand += waveScoreMin;
-                if (rand > 40){
-                    rand = 40;
+                if (rand >= 40){
+                    rand = 39;
                 }
             }
             Animal animal = Animal(this->path, this->posX, this->posY, this->animalTextures[rand]);
