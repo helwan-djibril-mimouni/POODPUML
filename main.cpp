@@ -1,6 +1,7 @@
 #include "Spawner.cpp"
 #include "TowerManager.cpp"
 #include "raylib.h"
+#include "player.h"
 
 int main()
 {
@@ -26,6 +27,7 @@ int main()
     TowerManager towerManager = TowerManager();
     Image image = LoadImage("assets/background.png");
     Texture2D background = LoadTextureFromImage(image);
+    int time = 0;
 
     // Main game loop
     while (!WindowShouldClose())
@@ -37,6 +39,8 @@ int main()
 
         spawner.update();
         towerManager.update(spawner.animals);
+        //player.update(spawner.animals, towerManager.towers);
+
 
 
         for (int i = 0; i < spawner.animals.size(); i++)
@@ -48,9 +52,13 @@ int main()
             DrawTexture(towerManager.towers[i].texture, towerManager.towers[i].x, towerManager.towers[i].y, WHITE);
         }
 
-        // TODO: add turret system (don't forget to make it infinitely upgradable, or at least a lot)
-        // help : can simply check for animal in radius r
-        // example : if (turret.x - animal.x <= abs(r)) { animal.end = true; } + animation ?
+        DrawText(("Vague: " + std::to_string(spawner.wave)).c_str(), 10, 10, 20, WHITE);
+
+        DrawText(("Argent: " + std::to_string(2045/*player.money*/)).c_str(), 250, 10, 20, WHITE);
+
+        DrawText(("Vie: " + std::to_string(10/*player.life*/)).c_str(), 450, 10, 20, WHITE);
+
+        DrawText(("timer: " + std::to_string(10/*player.timer*/)).c_str(), 650, 10, 20, WHITE);
 
         EndDrawing();
     }

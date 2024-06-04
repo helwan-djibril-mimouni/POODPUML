@@ -1,7 +1,5 @@
-
 #include "raylib.h"
 #include <vector>
-
 class Tower
 {
 public:

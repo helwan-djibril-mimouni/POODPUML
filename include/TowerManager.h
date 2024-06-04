@@ -1,6 +1,5 @@
 #include "Tower.cpp"
 
-
 class TowerManager
 {
 

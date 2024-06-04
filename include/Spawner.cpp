@@ -35,7 +35,7 @@ void Spawner::update(){
                     rand = 40;
                 }
             }
-            Animal animal = Animal(this->path, this->posX, this->posY, this->animalTextures[rand]);
+            Animal animal = Animal(this->path, this->posX, this->posY, this->animalTextures[rand], rand +1);
             this->animals.push_back(animal);
             waveAmount--;
         }
@@ -43,7 +43,7 @@ void Spawner::update(){
 
     for (int i = 0; i < animals.size(); i++)
     {
-        if (animals[i].end){
+        if (animals[i].end){                
             animals.erase(animals.begin()+i);
         }
         animals[i].update();

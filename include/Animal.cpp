@@ -1,6 +1,6 @@
 #include "Animal.h"
 
-Animal::Animal(Path path, int x, int y, Texture2D texture) : path(path)
+Animal::Animal(Path path, int x, int y, Texture2D texture, int health) : path(path)
 {
     this->x = x;
     this->y = y;
@@ -8,7 +8,8 @@ Animal::Animal(Path path, int x, int y, Texture2D texture) : path(path)
     this->pathsDone = 0;
     this->lengthFromPath = 0;
     this->end = false;
-}                               // TODO: add health implemented from Spawner, health = num in getTexture()
+    this->health = health;
+}
 
 Animal::~Animal()
 {
@@ -29,7 +30,6 @@ void Animal::update(){
     }
     // TODO: animal killed by turret
     if (direction == -1){
-        // TODO: remove 1 hp from player
         this->end = true;
     }
     if (direction == 0){

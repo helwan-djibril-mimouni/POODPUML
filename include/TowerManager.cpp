@@ -1,5 +1,4 @@
 #include "TowerManager.h"
-#include "raylib.h"
 #include <vector>
 
 TowerManager::TowerManager(/* args */)
