@@ -9,7 +9,7 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    SetTargetFPS(60);
 
     Path path = Path(0, 300);
     path.add(1, 500);
@@ -24,15 +24,15 @@ int main()
     Spawner spawner = Spawner(path, 0, 50);
 
     Image image = LoadImage("assets/background.png");
-    Texture2D texture = LoadTextureFromImage(image);
+    Texture2D background = LoadTextureFromImage(image);
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(BLACK);
 
-        DrawTexture(texture, 0, 0, WHITE);
+        DrawTexture(background, 0, 0, WHITE);
 
         spawner.update();
 
@@ -41,9 +41,12 @@ int main()
             DrawTexture(spawner.animals[i].texture, spawner.animals[i].x, spawner.animals[i].y, WHITE);
         }
 
+        // TODO: add turret system (don't forget to make it infinitely upgradable, or at least a lot)
+        // help : can simply check for animal in radius r
+        // example : if (turret.x - animal.x <= abs(r)) { animal.end = true; } + animation ?
+
         EndDrawing();
     }
 
     return 0;
 }
-// need class for path, class for animal following path

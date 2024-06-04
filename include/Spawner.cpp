@@ -43,10 +43,10 @@ void Spawner::update(){
 
     for (int i = 0; i < animals.size(); i++)
     {
-        animals[i].update();
         if (animals[i].end){
             animals.erase(animals.begin()+i);
         }
+        animals[i].update();
     }
 
     if (waveAmount == 0 && animals.size() == 0){
