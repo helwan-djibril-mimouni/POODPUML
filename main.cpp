@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "MainMenu.cpp"
+#include "scoreMenu.cpp"
 
 int main(){
     // Initialization
@@ -12,8 +13,18 @@ int main(){
 
     // Main game loop
     MainMenu mainMenu;
+    scoreMenu ScoreMenu("scores.txt");
     while (!WindowShouldClose()){
-        mainMenu.drawMenu();
-        mainMenu.eventListener();
+        if (!mainMenu.scoreMenu) {
+            mainMenu.drawMenu();
+            mainMenu.eventListener();
+        }
+        else{
+            ScoreMenu.draw();
+            ScoreMenu.eventListener();
+            if (!ScoreMenu.menulaunch){
+                mainMenu.scoreMenu = false;
+            }
+        }
     }
 }

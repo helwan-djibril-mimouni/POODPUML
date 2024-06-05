@@ -6,6 +6,7 @@ class MainMenu {
         Music music; // Music stream
 
     public:
+        bool scoreMenu = false;
         MainMenu() {
             // Initialize the music stream
             InitAudioDevice();
@@ -29,7 +30,7 @@ class MainMenu {
                 DrawText("Normal Mode", 400 - MeasureText("Normal Mode", 30) / 2, 210, 30, WHITE);
 
                 DrawRectangle(275, 300, 250, 50, GRAY);
-                DrawText("Endless Mode", 400 - MeasureText("Endless Mode", 30) / 2, 310, 30, WHITE);
+                DrawText("Score", 400 - MeasureText("Score", 30) / 2, 310, 30, WHITE);
 
                 DrawText("Volume", 400 - MeasureText("Volume", 30) / 2, 400, 30, WHITE);
                 DrawRectangle(275, 440, 250, 20, GRAY);
@@ -49,7 +50,7 @@ class MainMenu {
                     if (mousePos.y > 200 && mousePos.y < 250) {
                         // Normal Mode
                     } else if (mousePos.y > 300 && mousePos.y < 350) {
-                        // Endless Mode
+                        scoreMenu = true;
                     } else if (mousePos.y > 500 && mousePos.y < 550) {
                         CloseWindow();
                     }
