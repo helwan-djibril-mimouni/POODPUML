@@ -7,6 +7,7 @@ class MainMenu {
 
     public:
         bool scoreMenu = false;
+        bool game = false;
         MainMenu() {
             InitAudioDevice();
             music = LoadMusicStream("music/MainMenu.mp3");
@@ -46,7 +47,7 @@ class MainMenu {
                 Vector2 mousePos = GetMousePosition();
                 if (mousePos.x > 275 && mousePos.x < 525) {
                     if (mousePos.y > 200 && mousePos.y < 250) {
-                        // Normal Mode
+                        game = true;
                     } else if (mousePos.y > 300 && mousePos.y < 350) {
                         scoreMenu = true;
                     } else if (mousePos.y > 500 && mousePos.y < 550) {

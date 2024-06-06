@@ -17,7 +17,7 @@ Ce projet est un jeu de Tower Defense développé en C++ en utilisant la bibliot
 
 Pour compiler le projet, utilisez la commande suivante :
 
-    g++ .\main.cpp -I .\include\ -L .\lib\ -lraylib -lopengl32 -lgdi32 -lwinmm
+g++ .\main.cpp -I .\include\ -L .\lib\ -lraylib -lopengl32 -lgdi32 -lwinmm
 
 Cette commande inclut les fichiers d'en-tête de Raylib depuis le dossier include et lie les bibliothèques depuis le dossier lib.
 
