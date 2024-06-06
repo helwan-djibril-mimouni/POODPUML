@@ -1,11 +1,11 @@
 #include "Spawner.h"
-#include "TextureLoader.cpp"
+#include "AnimalTextureLoader.cpp"
 #include <cstdlib>
 #include <ctime>
 
 Spawner::Spawner(Path path, int x, int y) : path(path)
 {
-    this->animalTextures = getTextures();
+    this->animalTextures = getAnimalTextures();
     this->posX = x;
     this->posY = y;
     this->wave = 1;
@@ -13,7 +13,7 @@ Spawner::Spawner(Path path, int x, int y) : path(path)
     this->waveScoreMin = 0;
     this->waveScoreMax = 0;
     this->count = 0;
-    this->spawnSpeed = 100;
+    this->spawnSpeed = 500;
     this->playerHP = 10;
 }
 
@@ -50,11 +50,25 @@ int Spawner::update(){
                 playerHP -= 1;
             }
             else{
-                money += 100*(animals[i].health+1);
+                money += 10*(animals[i].maxHealth);
             }
             animals.erase(animals.begin()+i);
         }
-        animals[i].update();
+        if (wave < 50){            
+            animals[i].update(5);
+        }
+        else if (wave < 60){
+            animals[i].update(4);
+        }
+        else if (wave < 70){
+            animals[i].update(3);
+        }
+        else if (wave < 85){
+            animals[i].update(2);
+        }
+        else if (wave < 100){
+            animals[i].update(1);
+        }
     }
 
     if (waveAmount == 0 && animals.size() == 0){

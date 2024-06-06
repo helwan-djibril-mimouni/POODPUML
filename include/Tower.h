@@ -6,6 +6,7 @@ class Tower
 {
 public:
     Tower( int x , int y);
+    Tower();
     int x;
     int y;
     int range;

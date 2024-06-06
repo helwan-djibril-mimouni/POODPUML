@@ -5,9 +5,10 @@ class TowerManager
 
 public:
     TowerManager();
-    std::vector<Tower> towers;
+    Tower towers[24];
     std::vector<Rectangle> tower_rectangles;
-    void addTower(int x, int y);
+    std::vector<Texture2D> towerTextures;
+    void addTower(int x, int y, int index);
     std::vector<std::vector<int>> update(std::vector<std::tuple<int, int>> animalsPos);  
     ~TowerManager();
     void gainMoney(int money);

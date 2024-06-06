@@ -1,7 +1,7 @@
 #include "TowerManager.h"
 #include <vector>
 
-TowerManager::TowerManager(/* args */)
+TowerManager::TowerManager()
 {
     Rectangle rectangle = {100, 96, 41, 41};
     tower_rectangles.push_back(rectangle);
@@ -50,17 +50,20 @@ TowerManager::TowerManager(/* args */)
     rectangle = {546, 499, 41, 41};
     tower_rectangles.push_back(rectangle);
     rectangle = {647, 499, 41, 41};
-    tower_rectangles.push_back(rectangle);
+    tower_rectangles.push_back(rectangle);     
 
     this->money = 200;
+    this->towerTextures = getTowerTextures();
 }
 
 
-void TowerManager::addTower(int x, int y){
-    if (money >= 100){
-        money -= 100;
-        Tower tower(x, y);
-        towers.push_back(tower);
+void TowerManager::addTower(int x, int y, int index){
+    if (towers[index].x < 0){
+        if (money >= 100){
+            money -= 100;
+            Tower tower(x, y);
+            towers[index] = tower;
+        }
     }
 }
 
@@ -73,11 +76,19 @@ std::vector<std::vector<int>> TowerManager::update(std::vector<std::tuple<int, i
     for (int i = 0; i < tower_rectangles.size(); i++)
     {
         if (CheckCollisionPointRec(GetMousePosition(), tower_rectangles[i]) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
-            addTower(tower_rectangles[i].x, tower_rectangles[i].y);
+            if (towers[i].x < 0){
+                addTower(tower_rectangles[i].x, tower_rectangles[i].y, i);
+            }
+            else{
+                if (money >= towers[i].cost_next_upgrade){
+                    money -= towers[i].cost_next_upgrade;
+                    towers[i].upgrade();
+                }
+            }
         }
     }
     std::vector<std::vector<int>> listDamages;
-    for (int i = 0; i < towers.size(); i++)
+    for (int i = 0; i < 24; i++)
     {
         std::vector<int> damages = towers[i].update(animalsPos);
         listDamages.push_back(damages);

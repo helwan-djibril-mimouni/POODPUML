@@ -1,4 +1,5 @@
 #include "Tower.h"
+#include "TowerTextureLoader.cpp"
 #include <iostream>
 
 Tower::Tower( int x , int y)
@@ -7,11 +8,25 @@ Tower::Tower( int x , int y)
     this->y = y;
     this->range = 50;
     this->level = 1;
-    this->cost_next_upgrade = 10;
+    this->cost_next_upgrade = 200;
     this->damage = 1;
     this->count = 0;
     this->fire_rate = 100;
-    this->texture = LoadTexture("assets/tower.png");
+    std::vector<Texture2D> towerTextures = getTowerTextures();
+    this->texture = towerTextures[0];
+}
+
+Tower::Tower()
+{
+    this->x = -100;
+    this->y = -100;
+    this->range = 1;
+    this->level = 1;
+    this->cost_next_upgrade = 200;
+    this->damage = 1;
+    this->count = 0;
+    this->fire_rate = 500;
+    this->texture = LoadTexture(NULL);
 }
 
 std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
@@ -29,6 +44,9 @@ std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
                 //animation ?
                 break;
             }
+            else{
+                damages.push_back(0);
+            }
         }
     }
     return damages;
@@ -37,9 +55,13 @@ std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
 
 void Tower::upgrade(){
     level++;
-    cost_next_upgrade += 10;
+    cost_next_upgrade *= 2;
     damage += 1;
-    fire_rate -= 1;
+    if (fire_rate > 0){
+        fire_rate -= 5;
+    }
+    std::vector<Texture2D> towerTextures = getTowerTextures();
+    this->texture = towerTextures[level-1];
 }
 
 Tower::~Tower()
