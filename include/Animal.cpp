@@ -8,6 +8,7 @@ Animal::Animal(Path path, int x, int y, Texture2D texture, int health) : path(pa
     this->pathsDone = 0;
     this->lengthFromPath = 0;
     this->end = false;
+    this->finish = false;
     this->health = health;
 }
 
@@ -31,6 +32,7 @@ void Animal::update(){
     // TODO: animal killed by turret
     if (direction == -1){
         this->end = true;
+        this->finish = true;
     }
     if (direction == 0){
         x++;
@@ -49,5 +51,9 @@ void Animal::update(){
     if (lengthFromPath >= length){
         pathsDone++;
         lengthFromPath = 0;
+    }
+
+    if (health <= 0){
+        this->end = true;
     }
 }

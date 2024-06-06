@@ -1,5 +1,7 @@
 #include "raylib.h"
 #include <vector>
+#include <iostream>
+
 class Tower
 {
 public:
@@ -7,7 +9,7 @@ public:
     int x;
     int y;
     int range;
-    void update(std::vector<Animal> animals);
+    std::vector<int> update(std::vector<std::tuple<int, int>> animals);
     void upgrade();
     int level;
     int cost_next_upgrade;

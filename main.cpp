@@ -28,6 +28,7 @@ int main()
     Image image = LoadImage("assets/background.png");
     Texture2D background = LoadTextureFromImage(image);
     int time = 0;
+    int count = 0;
 
     // Main game loop
     while (!WindowShouldClose())
@@ -37,8 +38,23 @@ int main()
 
         DrawTexture(background, 0, 0, WHITE);
 
-        spawner.update();
-        towerManager.update(spawner.animals);
+        int money = spawner.update();
+        towerManager.gainMoney(money);
+
+        std::vector<std::tuple<int, int>> positions;
+        for (Animal a : spawner.animals){
+            std::tuple<int, int> data = std::tuple(a.x, a.y);
+            positions.push_back(data);
+        }
+
+        std::vector<std::vector<int>> listDamages = towerManager.update(positions);
+
+        for (std::vector<int> damages : listDamages){
+            for (int i = 0; i < damages.size(); i++){
+                spawner.animals[i].health -= damages[i];
+            }
+        }
+        
         //player.update(spawner.animals, towerManager.towers);
 
 
@@ -54,11 +70,18 @@ int main()
 
         DrawText(("Vague: " + std::to_string(spawner.wave)).c_str(), 10, 10, 20, WHITE);
 
-        DrawText(("Argent: " + std::to_string(2045/*player.money*/)).c_str(), 250, 10, 20, WHITE);
+        DrawText(("Argent: " + std::to_string(towerManager.money)).c_str(), 250, 10, 20, WHITE);
 
-        DrawText(("Vie: " + std::to_string(10/*player.life*/)).c_str(), 450, 10, 20, WHITE);
+        DrawText(("Vie: " + std::to_string(spawner.playerHP)).c_str(), 450, 10, 20, WHITE);
 
-        DrawText(("timer: " + std::to_string(10/*player.timer*/)).c_str(), 650, 10, 20, WHITE);
+        DrawText(("timer: " + std::to_string(time)).c_str(), 650, 10, 20, WHITE);
+
+        if (count >= 60){
+            count = 0;
+            time++;
+        }
+
+        count++;
 
         EndDrawing();
     }

@@ -14,13 +14,15 @@ Spawner::Spawner(Path path, int x, int y) : path(path)
     this->waveScoreMax = 0;
     this->count = 0;
     this->spawnSpeed = 100;
+    this->playerHP = 10;
 }
 
 Spawner::~Spawner()
 {
 }
 
-void Spawner::update(){
+int Spawner::update(){
+    int money = 0;
     if (count == 0){
         if (waveAmount > 0){
             srand((unsigned) time(NULL));
@@ -44,6 +46,12 @@ void Spawner::update(){
     for (int i = 0; i < animals.size(); i++)
     {
         if (animals[i].end){                
+            if (animals[i].finish){
+                playerHP -= 1;
+            }
+            else{
+                money += 100*(animals[i].health+1);
+            }
             animals.erase(animals.begin()+i);
         }
         animals[i].update();
@@ -67,4 +75,6 @@ void Spawner::update(){
     if (count >= spawnSpeed){
         count = 0;
     }
+
+    return money;
 }

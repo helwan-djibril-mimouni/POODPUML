@@ -10,25 +10,28 @@ Tower::Tower( int x , int y)
     this->cost_next_upgrade = 10;
     this->damage = 1;
     this->count = 0;
-    this->fire_rate = 2;
+    this->fire_rate = 100;
     this->texture = LoadTexture("assets/tower.png");
 }
 
-
-
-void Tower::update(std::vector<Animal> animals){
+std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
     count++;
+    std::vector<int> damages;
     if (count >= fire_rate){
         count = 0;
-        for (int i = 0; i < animals.size(); i++)
+        for (int i = 0; i < animalsPos.size(); i++)
         {
-            if (abs(animals[i].x - x) <= range + 41 && abs(animals[i].y - y) <= range + 41){
-                animals[i].end = true;
+            int animalX = std::get<0>(animalsPos[i]);
+            int animalY = std::get<1>(animalsPos[i]);
+            if (abs(animalX - x) <= range + 41 && abs(animalY - y) <= range + 41){
+                damages.push_back(damage);
                 std::cout << "hit" << std::endl;
                 //animation ?
+                break;
             }
         }
-    } 
+    }
+    return damages;
 }
 
 

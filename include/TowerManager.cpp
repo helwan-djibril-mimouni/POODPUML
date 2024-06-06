@@ -51,15 +51,24 @@ TowerManager::TowerManager(/* args */)
     tower_rectangles.push_back(rectangle);
     rectangle = {647, 499, 41, 41};
     tower_rectangles.push_back(rectangle);
+
+    this->money = 200;
 }
 
 
 void TowerManager::addTower(int x, int y){
-    Tower tower(x, y);
-    towers.push_back(tower);
+    if (money >= 100){
+        money -= 100;
+        Tower tower(x, y);
+        towers.push_back(tower);
+    }
 }
 
-void TowerManager::update(std::vector<Animal> animals){
+void TowerManager::gainMoney(int money){
+    this->money += money;
+}
+
+std::vector<std::vector<int>> TowerManager::update(std::vector<std::tuple<int, int>> animalsPos){
 
     for (int i = 0; i < tower_rectangles.size(); i++)
     {
@@ -67,10 +76,13 @@ void TowerManager::update(std::vector<Animal> animals){
             addTower(tower_rectangles[i].x, tower_rectangles[i].y);
         }
     }
+    std::vector<std::vector<int>> listDamages;
     for (int i = 0; i < towers.size(); i++)
     {
-        towers[i].update(animals);
+        std::vector<int> damages = towers[i].update(animalsPos);
+        listDamages.push_back(damages);
     }
+    return listDamages;
 }
 
 

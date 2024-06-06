@@ -15,7 +15,8 @@ public:
     int waveScoreMax;
     int count;
     int spawnSpeed;
+    int playerHP;
     Spawner(Path path, int x, int y);
     ~Spawner();
-    void update();
+    int update();
 };
