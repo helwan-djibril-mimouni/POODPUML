@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 
-// Structure pour stocker les informations de score
 struct ScoreEntry {
     std::string pseudo;
     int score;
@@ -37,35 +36,30 @@ public:
         BeginDrawing();
         ClearBackground(BLACK);
 
-        //draw return button
         DrawRectangle(275, 500, 250, 50, GRAY);
         DrawText("Return", 400 - MeasureText("Return", 30) / 2, 510, 30, WHITE);
 
-        //draw scores
         DrawText("Hall of Fame", 400 - MeasureText("Hall of Fame", 50) / 2, 30, 50, RED);
-        int y = 100; // Position de départ en Y
+        int y = 100;
 
-        // Largeurs fixes pour chaque colonne
         const int pseudoColumnWidth = 150;
         const int scoreColumnWidth = 150;
         const int vagueColumnWidth = 100;
 
-        // Position X de départ pour chaque colonne
         const int pseudoColumnX = 100;
         const int scoreColumnX = pseudoColumnX + pseudoColumnWidth;
         const int vagueColumnX = scoreColumnX + scoreColumnWidth;
 
-        // Afficher les en-têtes des colonnes
         DrawText("Pseudo", pseudoColumnX, y, 20, BLUE);
         DrawText("Score", scoreColumnX, y, 20, BLUE);
         DrawText("Vague", vagueColumnX, y, 20, BLUE);
-        y += 30; // Déplacer vers le bas pour les scores
+        y += 30; 
 
         for (const auto& entry : scores) {
-            DrawText(entry.pseudo.c_str(), pseudoColumnX, y, 20, WHITE); // Afficher le pseudo
-            DrawText(TextFormat("%d", entry.score), scoreColumnX, y, 20, WHITE); // Afficher le score
-            DrawText(TextFormat("%d", entry.vague), vagueColumnX, y, 20, WHITE); // Afficher la vague
-            y += 30; // Déplacer vers le bas pour le prochain score
+            DrawText(entry.pseudo.c_str(), pseudoColumnX, y, 20, WHITE); 
+            DrawText(TextFormat("%d", entry.score), scoreColumnX, y, 20, WHITE); 
+            DrawText(TextFormat("%d", entry.vague), vagueColumnX, y, 20, WHITE); 
+            y += 30; 
         }
         EndDrawing();
     }

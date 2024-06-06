@@ -2,21 +2,19 @@
 
 class MainMenu {
     private:
-        float volume = 0.5f; // Volume level from 0.0 to 1.0
-        Music music; // Music stream
+        float volume = 0.5f; 
+        Music music; 
 
     public:
         bool scoreMenu = false;
         MainMenu() {
-            // Initialize the music stream
             InitAudioDevice();
-            music = LoadMusicStream("1.03 Title Screen.mp3"); // Replace with your music file path
+            music = LoadMusicStream("music/MainMenu.mp3");
             PlayMusicStream(music);
             SetMusicVolume(music, volume);
         }
 
         ~MainMenu() {
-            // Unload the music stream and close the audio device
             UnloadMusicStream(music);
             CloseAudioDevice();
         }
@@ -34,7 +32,7 @@ class MainMenu {
 
                 DrawText("Volume", 400 - MeasureText("Volume", 30) / 2, 400, 30, WHITE);
                 DrawRectangle(275, 440, 250, 20, GRAY);
-                DrawRectangle(275 + (int)(volume * 250), 435, 10, 30, WHITE); // Volume slider
+                DrawRectangle(275 + (int)(volume * 250), 435, 10, 30, WHITE);
 
                 DrawRectangle(275, 500, 250, 50, GRAY);
                 DrawText("Quit", 400 - MeasureText("Quit", 30) / 2, 510, 30, WHITE);
@@ -66,6 +64,6 @@ class MainMenu {
                 }
             }
 
-            UpdateMusicStream(music); // Update the music stream
+            UpdateMusicStream(music);
         }
 };

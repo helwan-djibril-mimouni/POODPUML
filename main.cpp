@@ -23,6 +23,7 @@ int main(){
             ScoreMenu.draw();
             ScoreMenu.eventListener();
             if (!ScoreMenu.menulaunch){
+                ScoreMenu.menulaunch = true;
                 mainMenu.scoreMenu = false;
             }
         }
