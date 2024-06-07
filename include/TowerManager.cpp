@@ -61,7 +61,7 @@ void TowerManager::addTower(int x, int y, int index){
     if (towers[index].x < 0){
         if (money >= 100){
             money -= 100;
-            Tower tower(x, y);
+            Tower tower(x, y, towerTextures[0]);
             towers[index] = tower;
         }
     }
@@ -82,7 +82,7 @@ std::vector<std::vector<int>> TowerManager::update(std::vector<std::tuple<int, i
             else{
                 if (money >= towers[i].cost_next_upgrade){
                     money -= towers[i].cost_next_upgrade;
-                    towers[i].upgrade();
+                    towers[i].upgrade(towerTextures[towers[i].level]);
                 }
             }
         }

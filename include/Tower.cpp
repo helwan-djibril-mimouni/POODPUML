@@ -2,7 +2,7 @@
 #include "TowerTextureLoader.cpp"
 #include <iostream>
 
-Tower::Tower( int x , int y)
+Tower::Tower( int x , int y, Texture2D texture)
 {
     this->x = x;
     this->y = y;
@@ -12,8 +12,7 @@ Tower::Tower( int x , int y)
     this->damage = 1;
     this->count = 0;
     this->fire_rate = 500;
-    std::vector<Texture2D> towerTextures = getTowerTextures();
-    this->texture = towerTextures[0];
+    this->texture = texture;
 }
 
 Tower::Tower()
@@ -61,15 +60,14 @@ std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
 }
 
 
-void Tower::upgrade(){
+void Tower::upgrade(Texture2D texture){
     level++;
     cost_next_upgrade *= 2;
     damage += 1;
     if (fire_rate > 5){
         fire_rate -= 5;
     }
-    std::vector<Texture2D> towerTextures = getTowerTextures();
-    this->texture = towerTextures[level-1];
+    this->texture = texture;
 }
 
 Tower::~Tower()
