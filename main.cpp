@@ -70,7 +70,12 @@ int main()
         for (int i = 0; i < 24; i++)
         {
             if (towerManager.towers[i].x > 0){
-                DrawTexture(towerManager.towers[i].texture, towerManager.towers[i].x, towerManager.towers[i].y, WHITE);
+                if (towerManager.towers[i].hit){
+                    DrawTexture(towerManager.towers[i].texture, towerManager.towers[i].x, towerManager.towers[i].y, GRAY);
+                }
+                else{
+                    DrawTexture(towerManager.towers[i].texture, towerManager.towers[i].x, towerManager.towers[i].y, WHITE);
+                }                
             }
         }
 

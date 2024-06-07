@@ -17,6 +17,8 @@ public:
     int damage;
     int count;
     int fire_rate;
+    bool hit;
+    int hitCount;
     Texture2D texture;
     ~Tower();
 };

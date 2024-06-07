@@ -27,10 +27,17 @@ Tower::Tower()
     this->count = 0;
     this->fire_rate = 500;
     this->texture = LoadTexture(NULL);
+    this->hit = false;
 }
 
 std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
     count++;
+    if (hitCount > 0){
+        hitCount--;
+    }
+    else{
+        hit = false;
+    }
     std::vector<int> damages;
     if (count >= fire_rate){
         count = 0;
@@ -40,6 +47,8 @@ std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
             int animalY = std::get<1>(animalsPos[i]);
             if (abs(animalX - x) <= range + 41 && abs(animalY - y) <= range + 41){
                 damages.push_back(damage);
+                hit = true;
+                hitCount = 10;
                 //animation ?
                 break;
             }
