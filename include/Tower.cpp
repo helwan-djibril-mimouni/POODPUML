@@ -11,7 +11,7 @@ Tower::Tower( int x , int y)
     this->cost_next_upgrade = 200;
     this->damage = 1;
     this->count = 0;
-    this->fire_rate = 100;
+    this->fire_rate = 500;
     std::vector<Texture2D> towerTextures = getTowerTextures();
     this->texture = towerTextures[0];
 }
@@ -40,7 +40,6 @@ std::vector<int> Tower::update(std::vector<std::tuple<int, int>> animalsPos){
             int animalY = std::get<1>(animalsPos[i]);
             if (abs(animalX - x) <= range + 41 && abs(animalY - y) <= range + 41){
                 damages.push_back(damage);
-                std::cout << "hit" << std::endl;
                 //animation ?
                 break;
             }
@@ -57,7 +56,7 @@ void Tower::upgrade(){
     level++;
     cost_next_upgrade *= 2;
     damage += 1;
-    if (fire_rate > 0){
+    if (fire_rate > 5){
         fire_rate -= 5;
     }
     std::vector<Texture2D> towerTextures = getTowerTextures();

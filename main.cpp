@@ -43,7 +43,7 @@ int main()
 
         int num = spawner.update();
         towerManager.gainMoney(num);
-        score++;
+        score += num;
 
         std::vector<std::tuple<int, int>> positions;
         for (Animal a : spawner.animals){
@@ -81,10 +81,15 @@ int main()
         DrawText(("Vie: " + std::to_string(spawner.playerHP)).c_str(), 450, 10, 20, WHITE);
 
         if (minutes <= 0){
-            DrawText(("timer: " + std::to_string(seconds)).c_str(), 650, 10, 20, WHITE);
+            DrawText(("Time: " + std::to_string(seconds)).c_str(), 650, 10, 20, WHITE);
         }
         else{
-            DrawText(("timer: " + std::to_string(minutes) + ":" + std::to_string(seconds)).c_str(), 650, 10, 20, WHITE);
+            if (seconds < 10){
+                DrawText(("Time: " + std::to_string(minutes) + ":0" + std::to_string(seconds)).c_str(), 650, 10, 20, WHITE);
+            }
+            else{
+                DrawText(("Time: " + std::to_string(minutes) + ":" + std::to_string(seconds)).c_str(), 650, 10, 20, WHITE);
+            }
         }
 
         if (count >= 300){
@@ -111,6 +116,18 @@ int main()
         ClearBackground(BLACK);
 
         DrawText(("Score: " + std::to_string(score)).c_str(), 10, 10, 20, WHITE);
+        if (minutes <= 0){
+            DrawText(("Time: " + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
+        }
+        else{
+            if (seconds < 10){
+                DrawText(("Time: " + std::to_string(minutes) + ":0" + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
+            }
+            else{
+                DrawText(("Time: " + std::to_string(minutes) + ":" + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
+            }
+        }
+        DrawText(("Wave: " + std::to_string(spawner.wave)).c_str(), 10, 110, 20, WHITE);
         
         EndDrawing();
     }    
