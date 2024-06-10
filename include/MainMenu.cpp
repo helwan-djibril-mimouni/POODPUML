@@ -26,7 +26,7 @@ class MainMenu {
                 DrawText("Tower Defense", 400 - MeasureText("Tower Defense", 50) / 2, 30, 50, WHITE);
 
                 DrawRectangle(275, 200, 250, 50, GRAY);
-                DrawText("Normal Mode", 400 - MeasureText("Normal Mode", 30) / 2, 210, 30, WHITE);
+                DrawText("Play", 400 - MeasureText("Play", 30) / 2, 210, 30, WHITE);
 
                 DrawRectangle(275, 300, 250, 50, GRAY);
                 DrawText("Score", 400 - MeasureText("Score", 30) / 2, 310, 30, WHITE);
