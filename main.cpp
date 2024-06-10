@@ -48,6 +48,9 @@ int main()
     MainMenu mainMenu;
     scoreMenu ScoreMenu("scores.txt");
     
+    Music music = LoadMusicStream("music/MainGame.mp3");
+    bool musicPlay = false;
+    
     // Main game loop
     while (!WindowShouldClose() && running){
         if (!mainMenu.scoreMenu && !mainMenu.game) {
@@ -57,6 +60,16 @@ int main()
         else if (mainMenu.game){
             BeginDrawing();
             ClearBackground(BLACK);
+
+            if (!musicPlay){
+                CloseAudioDevice();
+                InitAudioDevice();
+                PlayMusicStream(music);
+                SetMusicVolume(music, 0.5f);
+                musicPlay = true;
+            }
+            
+            UpdateMusicStream(music);
 
             DrawTexture(background, 0, 0, WHITE);
 

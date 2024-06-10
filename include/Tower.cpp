@@ -1,5 +1,4 @@
 #include "Tower.h"
-#include "TowerTextureLoader.cpp"
 #include <iostream>
 
 Tower::Tower( int x , int y, Texture2D texture)

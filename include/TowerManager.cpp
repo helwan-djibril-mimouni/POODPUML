@@ -1,4 +1,5 @@
 #include "TowerManager.h"
+#include "TowerTextureLoader.cpp"
 #include <vector>
 
 TowerManager::TowerManager()

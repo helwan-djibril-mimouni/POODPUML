@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include <vector>
 
-std::vector<Texture2D> getTowerTextures(){ // design pattern : singleton
+static std::vector<Texture2D> getTowerTextures(){ // design pattern : singleton and object pool
     std::vector<Texture2D> list;
     Image image = LoadImage("assets/towerA1.png");
     Texture2D texture = LoadTextureFromImage(image);
