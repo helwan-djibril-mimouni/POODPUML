@@ -52,12 +52,12 @@ int main()
     bool musicPlay = false;
     
     // Main game loop
-    while (!WindowShouldClose() && running){
+    while (!WindowShouldClose() /* && running */){
         if (!mainMenu.scoreMenu && !mainMenu.game) {
             mainMenu.drawMenu();
             mainMenu.eventListener();
         }
-        else if (mainMenu.game){
+        else if (mainMenu.game && running){
             BeginDrawing();
             ClearBackground(BLACK);
 
@@ -147,6 +147,39 @@ int main()
                 running = false;
             }
         }
+        else if (!running){
+            BeginDrawing();
+            ClearBackground(BLACK);
+
+            DrawText(("Score: " + std::to_string(score)).c_str(), 10, 10, 20, WHITE);
+            if (minutes <= 0){
+                DrawText(("Time: " + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
+            }
+            else{
+                if (seconds < 10){
+                    DrawText(("Time: " + std::to_string(minutes) + ":0" + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
+                }
+                else{
+                    DrawText(("Time: " + std::to_string(minutes) + ":" + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
+                }
+            }
+            DrawText(("Wave: " + std::to_string(spawner.wave)).c_str(), 10, 110, 20, WHITE);
+
+            DrawText("Press Enter to return to the main menu", 10, 250, 20, RED);
+            
+            EndDrawing();
+            if (IsKeyPressed(KEY_ENTER)){
+                running = true;
+                mainMenu.game = false;
+                spawner = Spawner(path, 0, 50);
+                towerManager = TowerManager();
+                score = 0;
+                seconds = 0;
+                minutes = 0;
+                count = 0;
+
+            }
+        }
         else{
             ScoreMenu.draw();
             ScoreMenu.eventListener();
@@ -157,27 +190,6 @@ int main()
         }
     }
     
-    // return score
-    while (!WindowShouldClose()){
-        BeginDrawing();
-        ClearBackground(BLACK);
-
-        DrawText(("Score: " + std::to_string(score)).c_str(), 10, 10, 20, WHITE);
-        if (minutes <= 0){
-            DrawText(("Time: " + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
-        }
-        else{
-            if (seconds < 10){
-                DrawText(("Time: " + std::to_string(minutes) + ":0" + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
-            }
-            else{
-                DrawText(("Time: " + std::to_string(minutes) + ":" + std::to_string(seconds)).c_str(), 10, 60, 20, WHITE);
-            }
-        }
-        DrawText(("Wave: " + std::to_string(spawner.wave)).c_str(), 10, 110, 20, WHITE);
-        
-        EndDrawing();
-    }    
-
+    
     return 0;
 }
