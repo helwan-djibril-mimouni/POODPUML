@@ -1,3 +1,4 @@
 Alice 1500 10
 Bob 1200 8
 Charlie 1800 12
+player 190 5
